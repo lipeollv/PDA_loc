@@ -18,7 +18,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_c9b36593ab43e0ea167bc7e99703e9db {
+                #map_cd8c188cb59090b94357892b4061ce36 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -72,29 +72,6 @@
             margin: 10px !important;
         }
         </style>
-        
-    
-        <div id="btn-aba-filtros" style="
-            position: fixed; 
-            top: 50%; 
-            left: 0; 
-            transform: translateY(-50%); 
-            z-index: 9999;
-            background-color: rgba(50, 50, 50, 0.70); 
-            color: white;
-            padding: 12px 4px;
-            border-radius: 0 6px 6px 0;
-            cursor: pointer;
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            font-weight: bold;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-            user-select: none;
-        ">
-            Filtros
-        </div>
         
     
         <style>
@@ -259,6 +236,20 @@
                 <span onclick="alternarPainel()" style="cursor: pointer; font-size: 18px; font-weight: bold; color: #bbb; padding: 2px 6px;">✕</span>
             </div>
             
+            <!-- Campo de Busca com Sugestões Suspensas -->
+            <div style="position: relative; margin-bottom: 15px;">
+                <input type="text" id="input-busca-equipe" onkeyup="buscarSugestaoEquipe()" placeholder="Buscar equipe..." 
+                       style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.2); 
+                              background-color: rgba(0, 0, 0, 0.4); color: white; font-size: 13px; box-sizing: border-box; outline: none;">
+                
+                <!-- Lista de Sugestões Flutuante -->
+                <div id="lista-sugestoes" 
+                     style="position: absolute; top: 100%; left: 0; right: 0; background: rgba(20, 20, 20, 0.95); 
+                            border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; margin-top: 4px; 
+                            max-height: 150px; overflow-y: auto; z-index: 10001; display: none; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+                </div>
+            </div>
+            
             <!-- cidades -->
             <div class="accordion-item" id="accordion-cidades">
                 <div class="accordion-header" onclick="alternarAccordion('accordion-cidades', event)">
@@ -274,7 +265,7 @@
                         <span class="seta-accordion">▶</span>
                     </div>
                     <div class="sub-accordion-content">
-                        <div class="item-equipe" onclick="focarEquipe(-22.8989776, -47.2356294, 16)">Bruno</div>
+                        <div class="item-equipe" onclick="focarEquipe(-22.8990162, -47.2356177, 16)">Bruno</div>
                         <div class="item-equipe" onclick="focarEquipe(-22.85229, -47.2069818, 16)">Wagner</div>
                         <div class="item-equipe" onclick="focarEquipe(-22.8875653, -47.2241412, 16)">Diogo</div>
                         <div class="item-equipe" onclick="focarEquipe(-22.8816091, -47.1639711, 16)">Ocione</div>
@@ -288,7 +279,7 @@
                         <span class="seta-accordion">▶</span>
                     </div>
                     <div class="sub-accordion-content">
-                        <div class="item-equipe" onclick="focarEquipe({}, {}, 16)">Gabriel Charles</div>
+                        <div class="item-equipe" onclick="focarEquipe(0, 0, 16)">Gabriel Charles</div>
                     </div>
                     </div>
                     
@@ -299,8 +290,8 @@
                         <span class="seta-accordion">▶</span>
                     </div>
                     <div class="sub-accordion-content">
-                        <div class="item-equipe" onclick="focarEquipe({}, {}, 16)">Anderson T</div>
-                        <div class="item-equipe" onclick="focarEquipe({}, {}, 16)">Lenaldo</div>
+                        <div class="item-equipe" onclick="focarEquipe(0, 0, 16)">Anderson T</div>
+                        <div class="item-equipe" onclick="focarEquipe(0, 0, 16)">Lenaldo</div>
                     </div>
                     </div>
                     
@@ -311,10 +302,10 @@
                         <span class="seta-accordion">▶</span>
                     </div>
                     <div class="sub-accordion-content">
-                        <div class="item-equipe" onclick="focarEquipe({}, {}, 16)">Jose Braz</div>
-                        <div class="item-equipe" onclick="focarEquipe({}, {}, 16)">Jose Costa</div>
-                        <div class="item-equipe" onclick="focarEquipe({}, {}, 16)">Davi Barbosa</div>
-                        <div class="item-equipe" onclick="focarEquipe({}, {}, 16)">Moises</div>
+                        <div class="item-equipe" onclick="focarEquipe(0, 0, 16)">Jose Braz</div>
+                        <div class="item-equipe" onclick="focarEquipe(0, 0, 16)">Jose Costa</div>
+                        <div class="item-equipe" onclick="focarEquipe(0, 0, 16)">Davi Barbosa</div>
+                        <div class="item-equipe" onclick="focarEquipe(0, 0, 16)">Moises</div>
                     </div>
                     </div>
                 
@@ -325,8 +316,8 @@
                             <span class="seta-accordion">▶</span>
                         </div>
                         <div class="sub-accordion-content">
-                            <div class="item-equipe" onclick="focarEquipe(-22.9321279, -47.2829067, 16)">Natan</div>
-                            <div class="item-equipe" onclick="focarEquipe(-22.9317679, -47.2565789, 16)">Irenaldo</div>
+                            <div class="item-equipe" onclick="focarEquipe(-22.9322586, -47.2829161, 16)">Natan</div>
+                            <div class="item-equipe" onclick="focarEquipe(-22.9234318, -47.2517879, 16)">Irenaldo</div>
                             <div class="item-equipe" onclick="focarEquipe(-22.9370054, -47.2515431, 16)">Fabio</div>
                         </div>
                     </div>
@@ -338,10 +329,10 @@
                             <span class="seta-accordion">▶</span>
                         </div>
                         <div class="sub-accordion-content">
-                            <div class="item-equipe" onclick="focarEquipe(-22.7529211, -47.1709726, 16)">Supervisor Jailson</div>
-                            <div class="item-equipe" onclick="focarEquipe(-22.7478839, -47.1662978, 16)">Cassio</div>
+                            <div class="item-equipe" onclick="focarEquipe(-22.7619451, -47.1766195, 16)">Supervisor Jailson</div>
+                            <div class="item-equipe" onclick="focarEquipe(-22.747873, -47.1663096, 16)">Cassio</div>
                             <div class="item-equipe" onclick="focarEquipe(-22.7245661, -47.1862792, 16)">Adriano</div>
-                            <div class="item-equipe" onclick="focarEquipe({}, {}, 16)">Jurandi</div>
+                            <div class="item-equipe" onclick="focarEquipe(0, 0, 16)">Jurandi</div>
                         </div>
                     </div>
                     
@@ -353,9 +344,9 @@
                         </div>
                         <div class="sub-accordion-content">
                             <div class="item-equipe" onclick="focarEquipe(-22.9102153, -47.2143821, 16)">Ivaldo</div>
-                            <div class="item-equipe" onclick="focarEquipe(-22.8648959, -47.1991349, 16)">Guilherme</div>
-                            <div class="item-equipe" onclick="focarEquipe({}, {}, 16)">Alexandro</div>
-                            <div class="item-equipe" onclick="focarEquipe(-22.8928405, -47.1968058, 16)">Jozimar</div>
+                            <div class="item-equipe" onclick="focarEquipe(-22.859246, -47.1976157, 16)">Guilherme</div>
+                            <div class="item-equipe" onclick="focarEquipe(0, 0, 16)">Alexandro</div>
+                            <div class="item-equipe" onclick="focarEquipe(-22.892858, -47.196786, 16)">Jozimar</div>
                         </div>
                     </div>
         
@@ -398,6 +389,43 @@
                         break;
                     }
                 }
+            }
+
+            function buscarSugestaoEquipe() {
+                var termo = document.getElementById('input-busca-equipe').value.toLowerCase().trim();
+                var lista = document.getElementById('lista-sugestoes');
+                var equipes = document.querySelectorAll('.item-equipe');
+                
+                lista.innerHTML = '';
+                
+                if (termo === '') {
+                    lista.style.display = 'none';
+                    return;
+                }
+                
+                var encontrou = false;
+                equipes.forEach(function(item) {
+                    var nome = item.textContent.trim();
+                    if (nome.toLowerCase().includes(termo)) {
+                        encontrou = true;
+                        var div = document.createElement('div');
+                        div.textContent = nome;
+                        div.style.cssText = 'padding: 8px 12px; cursor: pointer; font-size: 13px; color: #e0e0e0; border-bottom: 1px solid rgba(255,255,255,0.05);';
+                        
+                        div.onmouseover = function() { this.style.backgroundColor = 'rgba(0, 168, 232, 0.2)'; this.style.color = '#00A8E8'; };
+                        div.onmouseout = function() { this.style.backgroundColor = 'transparent'; this.style.color = '#e0e0e0'; };
+                        
+                        div.onclick = function() {
+                            item.click();
+                            document.getElementById('input-busca-equipe').value = '';
+                            lista.style.display = 'none';
+                        };
+                        
+                        lista.appendChild(div);
+                    }
+                });
+                
+                lista.style.display = encontrou ? 'block' : 'none';
             }
 
             // Persistência de coordenadas e zoom via LocalStorage
@@ -465,18 +493,18 @@
             border-radius: 4px;
             box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
         ">
-            Atualizado em: 31/08/2026 às 16:19
+            Atualizado em: 31/08/2026 às 16:21
         </div>
         
     
-            <div class="folium-map" id="map_c9b36593ab43e0ea167bc7e99703e9db" ></div>
+            <div class="folium-map" id="map_cd8c188cb59090b94357892b4061ce36" ></div>
         
 </body>
 <script>
     
     
-            var map_c9b36593ab43e0ea167bc7e99703e9db = L.map(
-                "map_c9b36593ab43e0ea167bc7e99703e9db",
+            var map_cd8c188cb59090b94357892b4061ce36 = L.map(
+                "map_cd8c188cb59090b94357892b4061ce36",
                 {
                     center: [-22.9075409, -47.2166087],
                     crs: L.CRS.EPSG3857,
@@ -493,7 +521,7 @@
 
         
     
-            var tile_layer_858e3bb3fed6e9aa38404f1b515b066c = L.tileLayer(
+            var tile_layer_17590842cef3617eea0db3d46fcc369d = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -510,10 +538,10 @@
             );
         
     
-            tile_layer_858e3bb3fed6e9aa38404f1b515b066c.addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            tile_layer_17590842cef3617eea0db3d46fcc369d.addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var tile_layer_bc58ad1d9d0e75903b539b6093e8ad70 = L.tileLayer(
+            var tile_layer_ac9daeb5ed7b54dcc6167db449530acb = L.tileLayer(
                 "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
                 {
   "minZoom": 0,
@@ -530,10 +558,10 @@
             );
         
     
-            tile_layer_bc58ad1d9d0e75903b539b6093e8ad70.addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            tile_layer_ac9daeb5ed7b54dcc6167db449530acb.addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var tile_layer_8512bdbaa867b003065ec1bb2fc9ce8a = L.tileLayer(
+            var tile_layer_d64d34b4629103139a7088486249c042 = L.tileLayer(
                 "https://comgas-proxy.dgtutoriais-android.workers.dev/{z}/{x}/{y}",
                 {
   "minZoom": 0,
@@ -552,10 +580,10 @@
             );
         
     
-            tile_layer_8512bdbaa867b003065ec1bb2fc9ce8a.addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            tile_layer_d64d34b4629103139a7088486249c042.addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var tile_layer_ec58d885c810fb428d25c53cbe69d490 = L.tileLayer(
+            var tile_layer_328ae31ad3253c6591b3e99e8eac2974 = L.tileLayer(
                 "https://mt1.google.com/vt/lyrs=m\u0026x={x}\u0026y={y}\u0026z={z}",
                 {
   "minZoom": 0,
@@ -572,39 +600,39 @@
             );
         
     
-            tile_layer_ec58d885c810fb428d25c53cbe69d490.addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            tile_layer_328ae31ad3253c6591b3e99e8eac2974.addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var layer_control_dc2f7cfbcee0b0df1d5ce375b7933229_layers = {
+            var layer_control_a5d68299e58f13c4a70e33dd968b39bd_layers = {
                 base_layers : {
-                    "Mapa Desenhado" : tile_layer_858e3bb3fed6e9aa38404f1b515b066c,
-                    "Sat\u00e9lite" : tile_layer_bc58ad1d9d0e75903b539b6093e8ad70,
-                    "Mapa GoogleMaps" : tile_layer_ec58d885c810fb428d25c53cbe69d490,
+                    "Mapa Desenhado" : tile_layer_17590842cef3617eea0db3d46fcc369d,
+                    "Sat\u00e9lite" : tile_layer_ac9daeb5ed7b54dcc6167db449530acb,
+                    "Mapa GoogleMaps" : tile_layer_328ae31ad3253c6591b3e99e8eac2974,
                 },
                 overlays :  {
-                    "Rede de G\u00e1s Comg\u00e1s" : tile_layer_8512bdbaa867b003065ec1bb2fc9ce8a,
+                    "Rede de G\u00e1s Comg\u00e1s" : tile_layer_d64d34b4629103139a7088486249c042,
                 },
             };
-            let layer_control_dc2f7cfbcee0b0df1d5ce375b7933229 = L.control.layers(
-                layer_control_dc2f7cfbcee0b0df1d5ce375b7933229_layers.base_layers,
-                layer_control_dc2f7cfbcee0b0df1d5ce375b7933229_layers.overlays,
+            let layer_control_a5d68299e58f13c4a70e33dd968b39bd = L.control.layers(
+                layer_control_a5d68299e58f13c4a70e33dd968b39bd_layers.base_layers,
+                layer_control_a5d68299e58f13c4a70e33dd968b39bd_layers.overlays,
                 {
   "position": "topleft",
   "collapsed": true,
   "autoZIndex": true,
 }
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
 
         
     
-            var marker_7068234f29800df870a146e43d2c2f08 = L.marker(
+            var marker_f92b0410d209036128413fc4c5706b39 = L.marker(
                 [-22.9075409, -47.2166087],
                 {
 }
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var icon_b805d32415f7343994c4162b94dd1691 = L.AwesomeMarkers.icon(
+            var icon_60ef2c35f2157f59b8af5a6f3c18ca3b = L.AwesomeMarkers.icon(
                 {
   "markerColor": "darkgreen",
   "iconColor": "white",
@@ -615,24 +643,24 @@
             );
         
     
-        var popup_65247775a6cb69f6b329f41dd796a263 = L.popup({
+        var popup_e1caa79b486a5fcce459db1db77410c0 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_0ff58f3c5eaae51c61db66bcd5200815 = $(`<div id="html_0ff58f3c5eaae51c61db66bcd5200815" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Programador - Filipe<br>                 <b>Coordenadas:</b> -22.90754, -47.21661                 </div>`)[0];
-                popup_65247775a6cb69f6b329f41dd796a263.setContent(html_0ff58f3c5eaae51c61db66bcd5200815);
+                var html_484da9a6e027418434ad52e8f4b30ecd = $(`<div id="html_484da9a6e027418434ad52e8f4b30ecd" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Programador - Filipe<br>                 <b>Coordenadas:</b> -22.90754, -47.21661                 </div>`)[0];
+                popup_e1caa79b486a5fcce459db1db77410c0.setContent(html_484da9a6e027418434ad52e8f4b30ecd);
             
         
 
-        marker_7068234f29800df870a146e43d2c2f08.bindPopup(popup_65247775a6cb69f6b329f41dd796a263)
+        marker_f92b0410d209036128413fc4c5706b39.bindPopup(popup_e1caa79b486a5fcce459db1db77410c0)
         ;
 
         
     
     
-            marker_7068234f29800df870a146e43d2c2f08.bindTooltip(
+            marker_f92b0410d209036128413fc4c5706b39.bindTooltip(
                 `<div>
                      Programador - Filipe
                  </div>`,
@@ -642,17 +670,17 @@
             );
         
     
-                marker_7068234f29800df870a146e43d2c2f08.setIcon(icon_b805d32415f7343994c4162b94dd1691);
+                marker_f92b0410d209036128413fc4c5706b39.setIcon(icon_60ef2c35f2157f59b8af5a6f3c18ca3b);
             
     
-            var marker_f0cb68f33ae3ec561f8cb9cdc58a47d9 = L.marker(
-                [-22.9317679, -47.2565789],
+            var marker_6205e5872fac23fdbad19e99b8241c1d = L.marker(
+                [-22.9234318, -47.2517879],
                 {
 }
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var icon_fcca806bc81115c85069615433b1eb5a = L.AwesomeMarkers.icon(
+            var icon_88384ff4684180c907e2aa771273f560 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "darkgreen",
   "iconColor": "white",
@@ -663,24 +691,24 @@
             );
         
     
-        var popup_d5c4d7d94afbbf7bf7d1f7707c868085 = L.popup({
+        var popup_132807cdc685ff25f073e638145a210b = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_0be27c8d70258bff0ff960efb19b7a0b = $(`<div id="html_0be27c8d70258bff0ff960efb19b7a0b" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Irenaldo<br>                 <b>Coordenadas:</b> -22.93177, -47.25658                 </div>`)[0];
-                popup_d5c4d7d94afbbf7bf7d1f7707c868085.setContent(html_0be27c8d70258bff0ff960efb19b7a0b);
+                var html_05340bdb025c6d3923a3ece431c2cba1 = $(`<div id="html_05340bdb025c6d3923a3ece431c2cba1" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Irenaldo<br>                 <b>Coordenadas:</b> -22.92343, -47.25179                 </div>`)[0];
+                popup_132807cdc685ff25f073e638145a210b.setContent(html_05340bdb025c6d3923a3ece431c2cba1);
             
         
 
-        marker_f0cb68f33ae3ec561f8cb9cdc58a47d9.bindPopup(popup_d5c4d7d94afbbf7bf7d1f7707c868085)
+        marker_6205e5872fac23fdbad19e99b8241c1d.bindPopup(popup_132807cdc685ff25f073e638145a210b)
         ;
 
         
     
     
-            marker_f0cb68f33ae3ec561f8cb9cdc58a47d9.bindTooltip(
+            marker_6205e5872fac23fdbad19e99b8241c1d.bindTooltip(
                 `<div>
                      Equipe 10
                  </div>`,
@@ -690,17 +718,17 @@
             );
         
     
-                marker_f0cb68f33ae3ec561f8cb9cdc58a47d9.setIcon(icon_fcca806bc81115c85069615433b1eb5a);
+                marker_6205e5872fac23fdbad19e99b8241c1d.setIcon(icon_88384ff4684180c907e2aa771273f560);
             
     
-            var marker_2d4862626be504a313688510c99f80ed = L.marker(
-                [-22.8928405, -47.1968058],
+            var marker_70527d470401682162996e4182380acb = L.marker(
+                [-22.892858, -47.196786],
                 {
 }
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var icon_b41e7c762f195bc25f17b7b406f5d78e = L.AwesomeMarkers.icon(
+            var icon_c53ab4cff0f8831db8e8eb4fc231bf17 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "darkgreen",
   "iconColor": "white",
@@ -711,24 +739,24 @@
             );
         
     
-        var popup_d9316a833b1a9d19e2630d6cd868f2b0 = L.popup({
+        var popup_e1edc48c90a7033999a2726393a3e8b5 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_9389877632bdfe8c8b4b060acfb1d42e = $(`<div id="html_9389877632bdfe8c8b4b060acfb1d42e" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Jozimar<br>                 <b>Coordenadas:</b> -22.89284, -47.19681                 </div>`)[0];
-                popup_d9316a833b1a9d19e2630d6cd868f2b0.setContent(html_9389877632bdfe8c8b4b060acfb1d42e);
+                var html_56ef035f6168d9091cf6f786d5756bfe = $(`<div id="html_56ef035f6168d9091cf6f786d5756bfe" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Jozimar<br>                 <b>Coordenadas:</b> -22.89286, -47.19679                 </div>`)[0];
+                popup_e1edc48c90a7033999a2726393a3e8b5.setContent(html_56ef035f6168d9091cf6f786d5756bfe);
             
         
 
-        marker_2d4862626be504a313688510c99f80ed.bindPopup(popup_d9316a833b1a9d19e2630d6cd868f2b0)
+        marker_70527d470401682162996e4182380acb.bindPopup(popup_e1edc48c90a7033999a2726393a3e8b5)
         ;
 
         
     
     
-            marker_2d4862626be504a313688510c99f80ed.bindTooltip(
+            marker_70527d470401682162996e4182380acb.bindTooltip(
                 `<div>
                      Equipe 19
                  </div>`,
@@ -738,65 +766,17 @@
             );
         
     
-                marker_2d4862626be504a313688510c99f80ed.setIcon(icon_b41e7c762f195bc25f17b7b406f5d78e);
+                marker_70527d470401682162996e4182380acb.setIcon(icon_c53ab4cff0f8831db8e8eb4fc231bf17);
             
     
-            var marker_1b7d91c5d45b7ad0a41b1668d3eaf775 = L.marker(
-                [-22.8816091, -47.1639711],
+            var marker_e311c3e26810ed39754c2ff7561f4101 = L.marker(
+                [-22.9322586, -47.2829161],
                 {
 }
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var icon_0d573faa2ad4757338085d6bb083a356 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_003567fe96c85c07d993e1fe4f113112 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_98c9361948ac96087abfaa8f6c6f354d = $(`<div id="html_98c9361948ac96087abfaa8f6c6f354d" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Ocione<br>                 <b>Coordenadas:</b> -22.88161, -47.16397                 </div>`)[0];
-                popup_003567fe96c85c07d993e1fe4f113112.setContent(html_98c9361948ac96087abfaa8f6c6f354d);
-            
-        
-
-        marker_1b7d91c5d45b7ad0a41b1668d3eaf775.bindPopup(popup_003567fe96c85c07d993e1fe4f113112)
-        ;
-
-        
-    
-    
-            marker_1b7d91c5d45b7ad0a41b1668d3eaf775.bindTooltip(
-                `<div>
-                     Equipe 01
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_1b7d91c5d45b7ad0a41b1668d3eaf775.setIcon(icon_0d573faa2ad4757338085d6bb083a356);
-            
-    
-            var marker_d042350c665240beb8f59a15184c6a46 = L.marker(
-                [-22.8648959, -47.1991349],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_5f1c99d7ce6fe3efa531d0dad825a0a6 = L.AwesomeMarkers.icon(
+            var icon_9cb21a46e4e9ffcf838317870e68716c = L.AwesomeMarkers.icon(
                 {
   "markerColor": "darkgreen",
   "iconColor": "white",
@@ -807,696 +787,24 @@
             );
         
     
-        var popup_a9d7a3b3ac7fcdf83744083f9ad575f3 = L.popup({
+        var popup_c0d3efaad58bdcfb75f7a5cf293d2f0b = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_e94a5406c73c364e2056bc3b11d967eb = $(`<div id="html_e94a5406c73c364e2056bc3b11d967eb" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Guilherme<br>                 <b>Coordenadas:</b> -22.86490, -47.19913                 </div>`)[0];
-                popup_a9d7a3b3ac7fcdf83744083f9ad575f3.setContent(html_e94a5406c73c364e2056bc3b11d967eb);
+                var html_8a78829f3382ea9811b9bc77a8e669c5 = $(`<div id="html_8a78829f3382ea9811b9bc77a8e669c5" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Natan<br>                 <b>Coordenadas:</b> -22.93226, -47.28292                 </div>`)[0];
+                popup_c0d3efaad58bdcfb75f7a5cf293d2f0b.setContent(html_8a78829f3382ea9811b9bc77a8e669c5);
             
         
 
-        marker_d042350c665240beb8f59a15184c6a46.bindPopup(popup_a9d7a3b3ac7fcdf83744083f9ad575f3)
+        marker_e311c3e26810ed39754c2ff7561f4101.bindPopup(popup_c0d3efaad58bdcfb75f7a5cf293d2f0b)
         ;
 
         
     
     
-            marker_d042350c665240beb8f59a15184c6a46.bindTooltip(
-                `<div>
-                     Equipe 16
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_d042350c665240beb8f59a15184c6a46.setIcon(icon_5f1c99d7ce6fe3efa531d0dad825a0a6);
-            
-    
-            var marker_c252f5a04225f9ff67d03257e7787978 = L.marker(
-                [-22.7529211, -47.1709726],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_6fc4e3d33615fe666c365ab4861b68b8 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_cf8ce6c4d640b8a945e0bcd2467506fc = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_8a38a5fe97eb52256c981e9b6826b2c2 = $(`<div id="html_8a38a5fe97eb52256c981e9b6826b2c2" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Supervisor Jailson<br>                 <b>Coordenadas:</b> -22.75292, -47.17097                 </div>`)[0];
-                popup_cf8ce6c4d640b8a945e0bcd2467506fc.setContent(html_8a38a5fe97eb52256c981e9b6826b2c2);
-            
-        
-
-        marker_c252f5a04225f9ff67d03257e7787978.bindPopup(popup_cf8ce6c4d640b8a945e0bcd2467506fc)
-        ;
-
-        
-    
-    
-            marker_c252f5a04225f9ff67d03257e7787978.bindTooltip(
-                `<div>
-                     jailson supervisor
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_c252f5a04225f9ff67d03257e7787978.setIcon(icon_6fc4e3d33615fe666c365ab4861b68b8);
-            
-    
-            var marker_383b11d46ebc17a8caa3ceafdac10c20 = L.marker(
-                [-22.7478839, -47.1662978],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_2c8335e16a10293b4d0228854534d3a2 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_2bdf81901b00ca3ee9b3e8dc67a2bd8c = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_012bc7028d3239a1e522e1942739f7fa = $(`<div id="html_012bc7028d3239a1e522e1942739f7fa" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Cassio<br>                 <b>Coordenadas:</b> -22.74788, -47.16630                 </div>`)[0];
-                popup_2bdf81901b00ca3ee9b3e8dc67a2bd8c.setContent(html_012bc7028d3239a1e522e1942739f7fa);
-            
-        
-
-        marker_383b11d46ebc17a8caa3ceafdac10c20.bindPopup(popup_2bdf81901b00ca3ee9b3e8dc67a2bd8c)
-        ;
-
-        
-    
-    
-            marker_383b11d46ebc17a8caa3ceafdac10c20.bindTooltip(
-                `<div>
-                     Equipe 14
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_383b11d46ebc17a8caa3ceafdac10c20.setIcon(icon_2c8335e16a10293b4d0228854534d3a2);
-            
-    
-            var marker_b9c830dfd47e7628dd2309a2fd081cdf = L.marker(
-                [-22.8435931, -47.6806989],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_bb950d463acf7594b60f8056e5034cb2 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_8dad7b84ea7627a6078eaff93e246759 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_060f500115a5a28d6e794f9f31557699 = $(`<div id="html_060f500115a5a28d6e794f9f31557699" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Saltinho E Mombuca Equipe<br>                 <b>Coordenadas:</b> -22.84359, -47.68070                 </div>`)[0];
-                popup_8dad7b84ea7627a6078eaff93e246759.setContent(html_060f500115a5a28d6e794f9f31557699);
-            
-        
-
-        marker_b9c830dfd47e7628dd2309a2fd081cdf.bindPopup(popup_8dad7b84ea7627a6078eaff93e246759)
-        ;
-
-        
-    
-    
-            marker_b9c830dfd47e7628dd2309a2fd081cdf.bindTooltip(
-                `<div>
-                     Saltinho E Mombuca Equipe
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_b9c830dfd47e7628dd2309a2fd081cdf.setIcon(icon_bb950d463acf7594b60f8056e5034cb2);
-            
-    
-            var marker_97c1c502688ae99c131c7e7bfc9db126 = L.marker(
-                [-22.8805263, -47.2077215],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_fa06ce98d25c4d0d1805f4a593a0d30c = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_8a9e3eeaf9b0743366b4d032fe063186 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_f6fc328be4f7af75021134e7d3409f60 = $(`<div id="html_f6fc328be4f7af75021134e7d3409f60" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Adriano<br>                 <b>Coordenadas:</b> -22.88053, -47.20772                 </div>`)[0];
-                popup_8a9e3eeaf9b0743366b4d032fe063186.setContent(html_f6fc328be4f7af75021134e7d3409f60);
-            
-        
-
-        marker_97c1c502688ae99c131c7e7bfc9db126.bindPopup(popup_8a9e3eeaf9b0743366b4d032fe063186)
-        ;
-
-        
-    
-    
-            marker_97c1c502688ae99c131c7e7bfc9db126.bindTooltip(
-                `<div>
-                     Equipe 05
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_97c1c502688ae99c131c7e7bfc9db126.setIcon(icon_fa06ce98d25c4d0d1805f4a593a0d30c);
-            
-    
-            var marker_4eccc6615d9005af8a97e4dd0b6700ab = L.marker(
-                [-22.9370054, -47.2515431],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_4b6410444ef33207995b3e04aebb3eea = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_847cfdc996433f1818772472e8cf7fd4 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_770aa16c896208a4da598a21aea41772 = $(`<div id="html_770aa16c896208a4da598a21aea41772" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Fabio<br>                 <b>Coordenadas:</b> -22.93701, -47.25154                 </div>`)[0];
-                popup_847cfdc996433f1818772472e8cf7fd4.setContent(html_770aa16c896208a4da598a21aea41772);
-            
-        
-
-        marker_4eccc6615d9005af8a97e4dd0b6700ab.bindPopup(popup_847cfdc996433f1818772472e8cf7fd4)
-        ;
-
-        
-    
-    
-            marker_4eccc6615d9005af8a97e4dd0b6700ab.bindTooltip(
-                `<div>
-                     Equipe 11
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_4eccc6615d9005af8a97e4dd0b6700ab.setIcon(icon_4b6410444ef33207995b3e04aebb3eea);
-            
-    
-            var marker_0b6bcb2a2ed46b2400ab4e33f7a58ba9 = L.marker(
-                [-22.85229, -47.2069818],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_0df18be54c8df40988c8bc50c77df93e = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_b85211a8870f6bfbebd67493e868e0a8 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_44c4aaa7b39059b7fa42978ae8260460 = $(`<div id="html_44c4aaa7b39059b7fa42978ae8260460" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Wagner<br>                 <b>Coordenadas:</b> -22.85229, -47.20698                 </div>`)[0];
-                popup_b85211a8870f6bfbebd67493e868e0a8.setContent(html_44c4aaa7b39059b7fa42978ae8260460);
-            
-        
-
-        marker_0b6bcb2a2ed46b2400ab4e33f7a58ba9.bindPopup(popup_b85211a8870f6bfbebd67493e868e0a8)
-        ;
-
-        
-    
-    
-            marker_0b6bcb2a2ed46b2400ab4e33f7a58ba9.bindTooltip(
-                `<div>
-                     Equipe 04
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_0b6bcb2a2ed46b2400ab4e33f7a58ba9.setIcon(icon_0df18be54c8df40988c8bc50c77df93e);
-            
-    
-            var marker_82d5c9b9e1e4e38564693133dfe1d2c5 = L.marker(
-                [-22.959749, -47.3101971],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_d2979d601e74fb3086e7e08350b20a82 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_0cbe16fe8931e69181e8c07a4d205f60 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_4d318e35e9ab4892040eff05e1571abd = $(`<div id="html_4d318e35e9ab4892040eff05e1571abd" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Equipe 18<br>                 <b>Coordenadas:</b> -22.95975, -47.31020                 </div>`)[0];
-                popup_0cbe16fe8931e69181e8c07a4d205f60.setContent(html_4d318e35e9ab4892040eff05e1571abd);
-            
-        
-
-        marker_82d5c9b9e1e4e38564693133dfe1d2c5.bindPopup(popup_0cbe16fe8931e69181e8c07a4d205f60)
-        ;
-
-        
-    
-    
-            marker_82d5c9b9e1e4e38564693133dfe1d2c5.bindTooltip(
-                `<div>
-                     Equipe 18
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_82d5c9b9e1e4e38564693133dfe1d2c5.setIcon(icon_d2979d601e74fb3086e7e08350b20a82);
-            
-    
-            var marker_d5129f63cbf221301a5d8fa8ed6c6a40 = L.marker(
-                [-22.7245661, -47.1862792],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_8f38d7b2e7ae55661115828d0cba2c2c = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_ebc80b76f2fc720a2ae23f0160cb1401 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_4f8828d6fe99f6f3beeef284301f7eff = $(`<div id="html_4f8828d6fe99f6f3beeef284301f7eff" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Adriano<br>                 <b>Coordenadas:</b> -22.72457, -47.18628                 </div>`)[0];
-                popup_ebc80b76f2fc720a2ae23f0160cb1401.setContent(html_4f8828d6fe99f6f3beeef284301f7eff);
-            
-        
-
-        marker_d5129f63cbf221301a5d8fa8ed6c6a40.bindPopup(popup_ebc80b76f2fc720a2ae23f0160cb1401)
-        ;
-
-        
-    
-    
-            marker_d5129f63cbf221301a5d8fa8ed6c6a40.bindTooltip(
-                `<div>
-                     Equipe 12
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_d5129f63cbf221301a5d8fa8ed6c6a40.setIcon(icon_8f38d7b2e7ae55661115828d0cba2c2c);
-            
-    
-            var marker_9ea3850b7a477f035ba53c1204f45b69 = L.marker(
-                [-22.8875653, -47.2241412],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_38dfcc756a3555bce7722e7e0e1f4ae4 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_20b21e0aa650bd3b56886ea95f2aba56 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_34747c2196b613e0374642633b508e43 = $(`<div id="html_34747c2196b613e0374642633b508e43" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Diogo<br>                 <b>Coordenadas:</b> -22.88757, -47.22414                 </div>`)[0];
-                popup_20b21e0aa650bd3b56886ea95f2aba56.setContent(html_34747c2196b613e0374642633b508e43);
-            
-        
-
-        marker_9ea3850b7a477f035ba53c1204f45b69.bindPopup(popup_20b21e0aa650bd3b56886ea95f2aba56)
-        ;
-
-        
-    
-    
-            marker_9ea3850b7a477f035ba53c1204f45b69.bindTooltip(
-                `<div>
-                     Equipe 02
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_9ea3850b7a477f035ba53c1204f45b69.setIcon(icon_38dfcc756a3555bce7722e7e0e1f4ae4);
-            
-    
-            var marker_12ae58d69537551dc35f595d56fa8fef = L.marker(
-                [-22.8926287, -47.241299],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_ed43a1a14ef353b180c11e2cfba2c737 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_8738aa4009d82f26df456c199f0feef0 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_208a9b3973b924edf2995a94ae51a907 = $(`<div id="html_208a9b3973b924edf2995a94ae51a907" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> cavalete 01 jp<br>                 <b>Coordenadas:</b> -22.89263, -47.24130                 </div>`)[0];
-                popup_8738aa4009d82f26df456c199f0feef0.setContent(html_208a9b3973b924edf2995a94ae51a907);
-            
-        
-
-        marker_12ae58d69537551dc35f595d56fa8fef.bindPopup(popup_8738aa4009d82f26df456c199f0feef0)
-        ;
-
-        
-    
-    
-            marker_12ae58d69537551dc35f595d56fa8fef.bindTooltip(
-                `<div>
-                     cavalete 01 jp
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_12ae58d69537551dc35f595d56fa8fef.setIcon(icon_ed43a1a14ef353b180c11e2cfba2c737);
-            
-    
-            var marker_4cf2c865a3318b5b2a56a95fc46a7516 = L.marker(
-                [-22.9102153, -47.2143821],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_e1adbe92245d560438f2f7a8cdde5007 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_32fad1c90dc8489e576372dfedfa7556 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_ad94622d7bdfcb60ff78361eb687a122 = $(`<div id="html_ad94622d7bdfcb60ff78361eb687a122" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Ivaldo<br>                 <b>Coordenadas:</b> -22.91022, -47.21438                 </div>`)[0];
-                popup_32fad1c90dc8489e576372dfedfa7556.setContent(html_ad94622d7bdfcb60ff78361eb687a122);
-            
-        
-
-        marker_4cf2c865a3318b5b2a56a95fc46a7516.bindPopup(popup_32fad1c90dc8489e576372dfedfa7556)
-        ;
-
-        
-    
-    
-            marker_4cf2c865a3318b5b2a56a95fc46a7516.bindTooltip(
-                `<div>
-                     Equipe 15
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_4cf2c865a3318b5b2a56a95fc46a7516.setIcon(icon_e1adbe92245d560438f2f7a8cdde5007);
-            
-    
-            var marker_dc9aca57a1069a3579cfc15c6efc2a5b = L.marker(
-                [-22.721583, -47.1871243],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_d83d227832e68f0756964c3cde7e61a1 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_956659e77ed6c349e9396c29dd1f58e3 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_b82a51fc1c52f1886ca429f64a7f1991 = $(`<div id="html_b82a51fc1c52f1886ca429f64a7f1991" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Equipe 26<br>                 <b>Coordenadas:</b> -22.72158, -47.18712                 </div>`)[0];
-                popup_956659e77ed6c349e9396c29dd1f58e3.setContent(html_b82a51fc1c52f1886ca429f64a7f1991);
-            
-        
-
-        marker_dc9aca57a1069a3579cfc15c6efc2a5b.bindPopup(popup_956659e77ed6c349e9396c29dd1f58e3)
-        ;
-
-        
-    
-    
-            marker_dc9aca57a1069a3579cfc15c6efc2a5b.bindTooltip(
-                `<div>
-                     Equipe 26
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_dc9aca57a1069a3579cfc15c6efc2a5b.setIcon(icon_d83d227832e68f0756964c3cde7e61a1);
-            
-    
-            var marker_5378504805f2955b19c7ed8ae342d4be = L.marker(
-                [-22.9075606, -47.2166347],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_15b31ab8868f59e05517c16fcb481153 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_6f7d4eca1bf975be459b3be9d6003104 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_4732a82383a5dec077fe1f8646cb45d6 = $(`<div id="html_4732a82383a5dec077fe1f8646cb45d6" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Financeiro En Edileuza e Val<br>                 <b>Coordenadas:</b> -22.90756, -47.21663                 </div>`)[0];
-                popup_6f7d4eca1bf975be459b3be9d6003104.setContent(html_4732a82383a5dec077fe1f8646cb45d6);
-            
-        
-
-        marker_5378504805f2955b19c7ed8ae342d4be.bindPopup(popup_6f7d4eca1bf975be459b3be9d6003104)
-        ;
-
-        
-    
-    
-            marker_5378504805f2955b19c7ed8ae342d4be.bindTooltip(
-                `<div>
-                     Financeiro En Edileuza e Val
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_5378504805f2955b19c7ed8ae342d4be.setIcon(icon_15b31ab8868f59e05517c16fcb481153);
-            
-    
-            var marker_8f6f8c68b14c1ac7670d2bb97dd41f86 = L.marker(
-                [-22.9321279, -47.2829067],
-                {
-}
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
-        
-    
-            var icon_98e035c0d0f7772708efcf9ff123bcb2 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "darkgreen",
-  "iconColor": "white",
-  "icon": "truck",
-  "prefix": "fa",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_aec14bbfb05cb3743a273639812dc047 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_0808ff78db135cbfe37f08880afd76a4 = $(`<div id="html_0808ff78db135cbfe37f08880afd76a4" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Natan<br>                 <b>Coordenadas:</b> -22.93213, -47.28291                 </div>`)[0];
-                popup_aec14bbfb05cb3743a273639812dc047.setContent(html_0808ff78db135cbfe37f08880afd76a4);
-            
-        
-
-        marker_8f6f8c68b14c1ac7670d2bb97dd41f86.bindPopup(popup_aec14bbfb05cb3743a273639812dc047)
-        ;
-
-        
-    
-    
-            marker_8f6f8c68b14c1ac7670d2bb97dd41f86.bindTooltip(
+            marker_e311c3e26810ed39754c2ff7561f4101.bindTooltip(
                 `<div>
                      Equipe 08
                  </div>`,
@@ -1506,17 +814,17 @@
             );
         
     
-                marker_8f6f8c68b14c1ac7670d2bb97dd41f86.setIcon(icon_98e035c0d0f7772708efcf9ff123bcb2);
+                marker_e311c3e26810ed39754c2ff7561f4101.setIcon(icon_9cb21a46e4e9ffcf838317870e68716c);
             
     
-            var marker_63257e8e254e67d12da135f4e4b108ea = L.marker(
-                [-22.8830588, -47.1509353],
+            var marker_1a4ce00b173d5b512c93230461846879 = L.marker(
+                [-22.859246, -47.1976157],
                 {
 }
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var icon_5fa2dffd6abe9c7b088dae1bac2d1dc1 = L.AwesomeMarkers.icon(
+            var icon_29ba652a46f3005bb9e601da158c814c = L.AwesomeMarkers.icon(
                 {
   "markerColor": "darkgreen",
   "iconColor": "white",
@@ -1527,26 +835,26 @@
             );
         
     
-        var popup_c8559dc885db70dfbf6783fe6c5ee9e1 = L.popup({
+        var popup_30d2b203698b12a85963ec44fa1f8287 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_60db9d5880416d3714e39daa432c1332 = $(`<div id="html_60db9d5880416d3714e39daa432c1332" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Cavalete 02 Jo<br>                 <b>Coordenadas:</b> -22.88306, -47.15094                 </div>`)[0];
-                popup_c8559dc885db70dfbf6783fe6c5ee9e1.setContent(html_60db9d5880416d3714e39daa432c1332);
+                var html_a1934da983fd06aee85ef4899f64c6a8 = $(`<div id="html_a1934da983fd06aee85ef4899f64c6a8" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Guilherme<br>                 <b>Coordenadas:</b> -22.85925, -47.19762                 </div>`)[0];
+                popup_30d2b203698b12a85963ec44fa1f8287.setContent(html_a1934da983fd06aee85ef4899f64c6a8);
             
         
 
-        marker_63257e8e254e67d12da135f4e4b108ea.bindPopup(popup_c8559dc885db70dfbf6783fe6c5ee9e1)
+        marker_1a4ce00b173d5b512c93230461846879.bindPopup(popup_30d2b203698b12a85963ec44fa1f8287)
         ;
 
         
     
     
-            marker_63257e8e254e67d12da135f4e4b108ea.bindTooltip(
+            marker_1a4ce00b173d5b512c93230461846879.bindTooltip(
                 `<div>
-                     Cavalete 02 Jo
+                     Equipe 16
                  </div>`,
                 {
   "sticky": true,
@@ -1554,17 +862,17 @@
             );
         
     
-                marker_63257e8e254e67d12da135f4e4b108ea.setIcon(icon_5fa2dffd6abe9c7b088dae1bac2d1dc1);
+                marker_1a4ce00b173d5b512c93230461846879.setIcon(icon_29ba652a46f3005bb9e601da158c814c);
             
     
-            var marker_ea84f9028838e7e143c28ecf849741be = L.marker(
-                [-22.9075372, -47.2164992],
+            var marker_c67621ea4a2aa352fff9393199981e29 = L.marker(
+                [-22.7619451, -47.1766195],
                 {
 }
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var icon_44dc4c719c2b26b61e8e087b8716ad24 = L.AwesomeMarkers.icon(
+            var icon_ffce27bbe6e1ae02f5b61f7fba4a1474 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "darkgreen",
   "iconColor": "white",
@@ -1575,26 +883,26 @@
             );
         
     
-        var popup_fff60000db82ef09dc52f811aed78461 = L.popup({
+        var popup_0175217505339479bbef72a4b145e59e = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_6a73740534a6be82df4411a1943af257 = $(`<div id="html_6a73740534a6be82df4411a1943af257" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Laisla Programação EN<br>                 <b>Coordenadas:</b> -22.90754, -47.21650                 </div>`)[0];
-                popup_fff60000db82ef09dc52f811aed78461.setContent(html_6a73740534a6be82df4411a1943af257);
+                var html_d05d333245011f5ad67750433116bf2b = $(`<div id="html_d05d333245011f5ad67750433116bf2b" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Supervisor Jailson<br>                 <b>Coordenadas:</b> -22.76195, -47.17662                 </div>`)[0];
+                popup_0175217505339479bbef72a4b145e59e.setContent(html_d05d333245011f5ad67750433116bf2b);
             
         
 
-        marker_ea84f9028838e7e143c28ecf849741be.bindPopup(popup_fff60000db82ef09dc52f811aed78461)
+        marker_c67621ea4a2aa352fff9393199981e29.bindPopup(popup_0175217505339479bbef72a4b145e59e)
         ;
 
         
     
     
-            marker_ea84f9028838e7e143c28ecf849741be.bindTooltip(
+            marker_c67621ea4a2aa352fff9393199981e29.bindTooltip(
                 `<div>
-                     Laisla Programação EN
+                     jailson supervisor
                  </div>`,
                 {
   "sticky": true,
@@ -1602,17 +910,17 @@
             );
         
     
-                marker_ea84f9028838e7e143c28ecf849741be.setIcon(icon_44dc4c719c2b26b61e8e087b8716ad24);
+                marker_c67621ea4a2aa352fff9393199981e29.setIcon(icon_ffce27bbe6e1ae02f5b61f7fba4a1474);
             
     
-            var marker_07fc74ab81ad1971068cb7ccf409185e = L.marker(
-                [-22.8989776, -47.2356294],
+            var marker_ff50afffc6e699a51ee5c4d2cd2351d5 = L.marker(
+                [-22.747873, -47.1663096],
                 {
 }
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var icon_25016efcec68708958d1b8b716e39799 = L.AwesomeMarkers.icon(
+            var icon_24be21882cf4cf4fb690e31dbc42cd6f = L.AwesomeMarkers.icon(
                 {
   "markerColor": "darkgreen",
   "iconColor": "white",
@@ -1623,24 +931,72 @@
             );
         
     
-        var popup_667264990eb0009633bb7bf9addc27b8 = L.popup({
+        var popup_f69aac0d6e0ac7e0e23e2a3f877effd3 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_9f8f74ebe8b12ab60fe27666b21ab17e = $(`<div id="html_9f8f74ebe8b12ab60fe27666b21ab17e" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Bruno<br>                 <b>Coordenadas:</b> -22.89898, -47.23563                 </div>`)[0];
-                popup_667264990eb0009633bb7bf9addc27b8.setContent(html_9f8f74ebe8b12ab60fe27666b21ab17e);
+                var html_768d01c726c2401e9db1991fb0340885 = $(`<div id="html_768d01c726c2401e9db1991fb0340885" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Cassio<br>                 <b>Coordenadas:</b> -22.74787, -47.16631                 </div>`)[0];
+                popup_f69aac0d6e0ac7e0e23e2a3f877effd3.setContent(html_768d01c726c2401e9db1991fb0340885);
             
         
 
-        marker_07fc74ab81ad1971068cb7ccf409185e.bindPopup(popup_667264990eb0009633bb7bf9addc27b8)
+        marker_ff50afffc6e699a51ee5c4d2cd2351d5.bindPopup(popup_f69aac0d6e0ac7e0e23e2a3f877effd3)
         ;
 
         
     
     
-            marker_07fc74ab81ad1971068cb7ccf409185e.bindTooltip(
+            marker_ff50afffc6e699a51ee5c4d2cd2351d5.bindTooltip(
+                `<div>
+                     Equipe 14
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ff50afffc6e699a51ee5c4d2cd2351d5.setIcon(icon_24be21882cf4cf4fb690e31dbc42cd6f);
+            
+    
+            var marker_d2f1b21b3381ae005667ce4a0a243cf5 = L.marker(
+                [-22.8990162, -47.2356177],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_da152372e40c1d26eefb4cd134b77a40 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e19307d0e0bbc01d76c2f7d6815b06eb = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c328274d0a016cf394a91800eb017c3a = $(`<div id="html_c328274d0a016cf394a91800eb017c3a" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Bruno<br>                 <b>Coordenadas:</b> -22.89902, -47.23562                 </div>`)[0];
+                popup_e19307d0e0bbc01d76c2f7d6815b06eb.setContent(html_c328274d0a016cf394a91800eb017c3a);
+            
+        
+
+        marker_d2f1b21b3381ae005667ce4a0a243cf5.bindPopup(popup_e19307d0e0bbc01d76c2f7d6815b06eb)
+        ;
+
+        
+    
+    
+            marker_d2f1b21b3381ae005667ce4a0a243cf5.bindTooltip(
                 `<div>
                      Equipe 07
                  </div>`,
@@ -1650,17 +1006,17 @@
             );
         
     
-                marker_07fc74ab81ad1971068cb7ccf409185e.setIcon(icon_25016efcec68708958d1b8b716e39799);
+                marker_d2f1b21b3381ae005667ce4a0a243cf5.setIcon(icon_da152372e40c1d26eefb4cd134b77a40);
             
     
-            var marker_1d3c39eb463ef236ebdec422e22a7848 = L.marker(
-                [-22.907568, -47.2165174],
+            var marker_65938aefe1da2de1cf8e2b19e36dd8e5 = L.marker(
+                [-22.8816091, -47.1639711],
                 {
 }
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var icon_f4f296b80f2cf037db27cad6360bad19 = L.AwesomeMarkers.icon(
+            var icon_45e504199208aafa91e71503faa1eaa5 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "darkgreen",
   "iconColor": "white",
@@ -1671,24 +1027,696 @@
             );
         
     
-        var popup_83669b48bd3cfca396e5828423ee9975 = L.popup({
+        var popup_77201f50c0e83da085cba90d7c09b134 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_b45d75865d854786e167b6f676e3f3de = $(`<div id="html_b45d75865d854786e167b6f676e3f3de" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> 13 Equipe<br>                 <b>Coordenadas:</b> -22.90757, -47.21652                 </div>`)[0];
-                popup_83669b48bd3cfca396e5828423ee9975.setContent(html_b45d75865d854786e167b6f676e3f3de);
+                var html_6359d491faa0dba4eb6ddfa529a23983 = $(`<div id="html_6359d491faa0dba4eb6ddfa529a23983" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Ocione<br>                 <b>Coordenadas:</b> -22.88161, -47.16397                 </div>`)[0];
+                popup_77201f50c0e83da085cba90d7c09b134.setContent(html_6359d491faa0dba4eb6ddfa529a23983);
             
         
 
-        marker_1d3c39eb463ef236ebdec422e22a7848.bindPopup(popup_83669b48bd3cfca396e5828423ee9975)
+        marker_65938aefe1da2de1cf8e2b19e36dd8e5.bindPopup(popup_77201f50c0e83da085cba90d7c09b134)
         ;
 
         
     
     
-            marker_1d3c39eb463ef236ebdec422e22a7848.bindTooltip(
+            marker_65938aefe1da2de1cf8e2b19e36dd8e5.bindTooltip(
+                `<div>
+                     Equipe 01
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_65938aefe1da2de1cf8e2b19e36dd8e5.setIcon(icon_45e504199208aafa91e71503faa1eaa5);
+            
+    
+            var marker_dd879ea975982cfdb51d417ac8bd4688 = L.marker(
+                [-22.8435931, -47.6806989],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_1054b684c4bd2154f1e4520caaeec9c7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_91a5b20d344dc9d27d23f3dd053ad675 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4dd631a1895c068c8a9abeeace996e00 = $(`<div id="html_4dd631a1895c068c8a9abeeace996e00" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Saltinho E Mombuca Equipe<br>                 <b>Coordenadas:</b> -22.84359, -47.68070                 </div>`)[0];
+                popup_91a5b20d344dc9d27d23f3dd053ad675.setContent(html_4dd631a1895c068c8a9abeeace996e00);
+            
+        
+
+        marker_dd879ea975982cfdb51d417ac8bd4688.bindPopup(popup_91a5b20d344dc9d27d23f3dd053ad675)
+        ;
+
+        
+    
+    
+            marker_dd879ea975982cfdb51d417ac8bd4688.bindTooltip(
+                `<div>
+                     Saltinho E Mombuca Equipe
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dd879ea975982cfdb51d417ac8bd4688.setIcon(icon_1054b684c4bd2154f1e4520caaeec9c7);
+            
+    
+            var marker_44a4688588233422db82f508e67ce1cf = L.marker(
+                [-22.8805263, -47.2077215],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_e8b6dac3e1c7980f5b8f7dd8a068ba59 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0587be1446a5c60dc5ee0eb1be84e046 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_563632dc5a2fb523e6e288b696853238 = $(`<div id="html_563632dc5a2fb523e6e288b696853238" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Adriano<br>                 <b>Coordenadas:</b> -22.88053, -47.20772                 </div>`)[0];
+                popup_0587be1446a5c60dc5ee0eb1be84e046.setContent(html_563632dc5a2fb523e6e288b696853238);
+            
+        
+
+        marker_44a4688588233422db82f508e67ce1cf.bindPopup(popup_0587be1446a5c60dc5ee0eb1be84e046)
+        ;
+
+        
+    
+    
+            marker_44a4688588233422db82f508e67ce1cf.bindTooltip(
+                `<div>
+                     Equipe 05
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_44a4688588233422db82f508e67ce1cf.setIcon(icon_e8b6dac3e1c7980f5b8f7dd8a068ba59);
+            
+    
+            var marker_17da72896f84fdf427e1c6e400ec7256 = L.marker(
+                [-22.9370054, -47.2515431],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_743dce14d39fa523f0a501058e9008a6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9ddc271cf69ae77e7d18c7d970e252af = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d8d03eaf532b50b670eb829ae893156a = $(`<div id="html_d8d03eaf532b50b670eb829ae893156a" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Fabio<br>                 <b>Coordenadas:</b> -22.93701, -47.25154                 </div>`)[0];
+                popup_9ddc271cf69ae77e7d18c7d970e252af.setContent(html_d8d03eaf532b50b670eb829ae893156a);
+            
+        
+
+        marker_17da72896f84fdf427e1c6e400ec7256.bindPopup(popup_9ddc271cf69ae77e7d18c7d970e252af)
+        ;
+
+        
+    
+    
+            marker_17da72896f84fdf427e1c6e400ec7256.bindTooltip(
+                `<div>
+                     Equipe 11
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_17da72896f84fdf427e1c6e400ec7256.setIcon(icon_743dce14d39fa523f0a501058e9008a6);
+            
+    
+            var marker_1efc4039ddc37ec36bb2b2dc828da0ee = L.marker(
+                [-22.85229, -47.2069818],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_f8a735b8d67eff7d7270706b236cd4f0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f1084340931259a2ae241b5924ceb735 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_add2c8fac300d896b305db0ba9b47346 = $(`<div id="html_add2c8fac300d896b305db0ba9b47346" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Wagner<br>                 <b>Coordenadas:</b> -22.85229, -47.20698                 </div>`)[0];
+                popup_f1084340931259a2ae241b5924ceb735.setContent(html_add2c8fac300d896b305db0ba9b47346);
+            
+        
+
+        marker_1efc4039ddc37ec36bb2b2dc828da0ee.bindPopup(popup_f1084340931259a2ae241b5924ceb735)
+        ;
+
+        
+    
+    
+            marker_1efc4039ddc37ec36bb2b2dc828da0ee.bindTooltip(
+                `<div>
+                     Equipe 04
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1efc4039ddc37ec36bb2b2dc828da0ee.setIcon(icon_f8a735b8d67eff7d7270706b236cd4f0);
+            
+    
+            var marker_89ba536069462331ac970cc809df8dd6 = L.marker(
+                [-22.959749, -47.3101971],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_9885dffe1c3b8e663286563af437f895 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b6a874c09b0551e7f734bf8202b6e15a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_861f81ef3dc11d5766e4a3b977623292 = $(`<div id="html_861f81ef3dc11d5766e4a3b977623292" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Equipe 18<br>                 <b>Coordenadas:</b> -22.95975, -47.31020                 </div>`)[0];
+                popup_b6a874c09b0551e7f734bf8202b6e15a.setContent(html_861f81ef3dc11d5766e4a3b977623292);
+            
+        
+
+        marker_89ba536069462331ac970cc809df8dd6.bindPopup(popup_b6a874c09b0551e7f734bf8202b6e15a)
+        ;
+
+        
+    
+    
+            marker_89ba536069462331ac970cc809df8dd6.bindTooltip(
+                `<div>
+                     Equipe 18
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_89ba536069462331ac970cc809df8dd6.setIcon(icon_9885dffe1c3b8e663286563af437f895);
+            
+    
+            var marker_74a15928e423897161446f90899d0e7d = L.marker(
+                [-22.7245661, -47.1862792],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_100ea34a2bccf266444a2c70c39d55c6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b46b0a9708ef7c219bbb82a1e85e1178 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0ae84c235c3911112d84b4b2a2083ca0 = $(`<div id="html_0ae84c235c3911112d84b4b2a2083ca0" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Adriano<br>                 <b>Coordenadas:</b> -22.72457, -47.18628                 </div>`)[0];
+                popup_b46b0a9708ef7c219bbb82a1e85e1178.setContent(html_0ae84c235c3911112d84b4b2a2083ca0);
+            
+        
+
+        marker_74a15928e423897161446f90899d0e7d.bindPopup(popup_b46b0a9708ef7c219bbb82a1e85e1178)
+        ;
+
+        
+    
+    
+            marker_74a15928e423897161446f90899d0e7d.bindTooltip(
+                `<div>
+                     Equipe 12
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_74a15928e423897161446f90899d0e7d.setIcon(icon_100ea34a2bccf266444a2c70c39d55c6);
+            
+    
+            var marker_dcc06f19b8731909052d1bded9c9b482 = L.marker(
+                [-22.8875653, -47.2241412],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_1b84ca86fc668c4aa4363f9d74cdc068 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7dab39f4eb5d0a02b8736a9c6d0edf28 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0b60e992b205d54f1224254a068db1fa = $(`<div id="html_0b60e992b205d54f1224254a068db1fa" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Diogo<br>                 <b>Coordenadas:</b> -22.88757, -47.22414                 </div>`)[0];
+                popup_7dab39f4eb5d0a02b8736a9c6d0edf28.setContent(html_0b60e992b205d54f1224254a068db1fa);
+            
+        
+
+        marker_dcc06f19b8731909052d1bded9c9b482.bindPopup(popup_7dab39f4eb5d0a02b8736a9c6d0edf28)
+        ;
+
+        
+    
+    
+            marker_dcc06f19b8731909052d1bded9c9b482.bindTooltip(
+                `<div>
+                     Equipe 02
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dcc06f19b8731909052d1bded9c9b482.setIcon(icon_1b84ca86fc668c4aa4363f9d74cdc068);
+            
+    
+            var marker_01e539329f2ef95dcc85295ccb866b03 = L.marker(
+                [-22.8926287, -47.241299],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_67cef2358f01085e3a26d18d342ec227 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1de27982aab7d71ef1d34c3451fecf46 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_cd702cd8d46c8983147d9d4327f10c5c = $(`<div id="html_cd702cd8d46c8983147d9d4327f10c5c" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> cavalete 01 jp<br>                 <b>Coordenadas:</b> -22.89263, -47.24130                 </div>`)[0];
+                popup_1de27982aab7d71ef1d34c3451fecf46.setContent(html_cd702cd8d46c8983147d9d4327f10c5c);
+            
+        
+
+        marker_01e539329f2ef95dcc85295ccb866b03.bindPopup(popup_1de27982aab7d71ef1d34c3451fecf46)
+        ;
+
+        
+    
+    
+            marker_01e539329f2ef95dcc85295ccb866b03.bindTooltip(
+                `<div>
+                     cavalete 01 jp
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_01e539329f2ef95dcc85295ccb866b03.setIcon(icon_67cef2358f01085e3a26d18d342ec227);
+            
+    
+            var marker_f69a77048c8f40979817ac80027f4cdc = L.marker(
+                [-22.9102153, -47.2143821],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_71a5618afbf752187d3d148ca207a6af = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b72a0d0e69dbda7f8295315725be2991 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_09d180867a012a496ffaf24f112d892d = $(`<div id="html_09d180867a012a496ffaf24f112d892d" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Ivaldo<br>                 <b>Coordenadas:</b> -22.91022, -47.21438                 </div>`)[0];
+                popup_b72a0d0e69dbda7f8295315725be2991.setContent(html_09d180867a012a496ffaf24f112d892d);
+            
+        
+
+        marker_f69a77048c8f40979817ac80027f4cdc.bindPopup(popup_b72a0d0e69dbda7f8295315725be2991)
+        ;
+
+        
+    
+    
+            marker_f69a77048c8f40979817ac80027f4cdc.bindTooltip(
+                `<div>
+                     Equipe 15
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f69a77048c8f40979817ac80027f4cdc.setIcon(icon_71a5618afbf752187d3d148ca207a6af);
+            
+    
+            var marker_e1d8ce7d732dd7b74989e9c2e3ec87e1 = L.marker(
+                [-22.721583, -47.1871243],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_fc8fc88f8e93dc7368bcb11c312319be = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e609aca8121d205a03b2bf096c9c3ec4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_69b421982b67b16a75c3a91a9412b74d = $(`<div id="html_69b421982b67b16a75c3a91a9412b74d" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Equipe 26<br>                 <b>Coordenadas:</b> -22.72158, -47.18712                 </div>`)[0];
+                popup_e609aca8121d205a03b2bf096c9c3ec4.setContent(html_69b421982b67b16a75c3a91a9412b74d);
+            
+        
+
+        marker_e1d8ce7d732dd7b74989e9c2e3ec87e1.bindPopup(popup_e609aca8121d205a03b2bf096c9c3ec4)
+        ;
+
+        
+    
+    
+            marker_e1d8ce7d732dd7b74989e9c2e3ec87e1.bindTooltip(
+                `<div>
+                     Equipe 26
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e1d8ce7d732dd7b74989e9c2e3ec87e1.setIcon(icon_fc8fc88f8e93dc7368bcb11c312319be);
+            
+    
+            var marker_2c1a2625ce64f12631a1baf50c882830 = L.marker(
+                [-22.9075606, -47.2166347],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_e120c67652974e2ea3e20a80cf502949 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_eee02e2a517adf9209e2b35e7afc72b4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f337df03266ce786eab94867d69c046a = $(`<div id="html_f337df03266ce786eab94867d69c046a" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Financeiro En Edileuza e Val<br>                 <b>Coordenadas:</b> -22.90756, -47.21663                 </div>`)[0];
+                popup_eee02e2a517adf9209e2b35e7afc72b4.setContent(html_f337df03266ce786eab94867d69c046a);
+            
+        
+
+        marker_2c1a2625ce64f12631a1baf50c882830.bindPopup(popup_eee02e2a517adf9209e2b35e7afc72b4)
+        ;
+
+        
+    
+    
+            marker_2c1a2625ce64f12631a1baf50c882830.bindTooltip(
+                `<div>
+                     Financeiro En Edileuza e Val
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2c1a2625ce64f12631a1baf50c882830.setIcon(icon_e120c67652974e2ea3e20a80cf502949);
+            
+    
+            var marker_ba5d9907c2e5292147bf3bcbd4bf9332 = L.marker(
+                [-22.8830588, -47.1509353],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_b9f3b2b2eba8655c0c796e8c3f1fe390 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5d2843a9eac1a2fb423d4afcf1157b35 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0b85161db1d01428ae0100e78d785a97 = $(`<div id="html_0b85161db1d01428ae0100e78d785a97" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Cavalete 02 Jo<br>                 <b>Coordenadas:</b> -22.88306, -47.15094                 </div>`)[0];
+                popup_5d2843a9eac1a2fb423d4afcf1157b35.setContent(html_0b85161db1d01428ae0100e78d785a97);
+            
+        
+
+        marker_ba5d9907c2e5292147bf3bcbd4bf9332.bindPopup(popup_5d2843a9eac1a2fb423d4afcf1157b35)
+        ;
+
+        
+    
+    
+            marker_ba5d9907c2e5292147bf3bcbd4bf9332.bindTooltip(
+                `<div>
+                     Cavalete 02 Jo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ba5d9907c2e5292147bf3bcbd4bf9332.setIcon(icon_b9f3b2b2eba8655c0c796e8c3f1fe390);
+            
+    
+            var marker_9c34d43709144d79eb1b25ad232594d3 = L.marker(
+                [-22.9075372, -47.2164992],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_a96d7adfa752971f2807a12322a98a00 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6b1205c9e116fdd6b7698c77af85edb4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5df400414ca285b01aef7caac98b1341 = $(`<div id="html_5df400414ca285b01aef7caac98b1341" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> Laisla Programação EN<br>                 <b>Coordenadas:</b> -22.90754, -47.21650                 </div>`)[0];
+                popup_6b1205c9e116fdd6b7698c77af85edb4.setContent(html_5df400414ca285b01aef7caac98b1341);
+            
+        
+
+        marker_9c34d43709144d79eb1b25ad232594d3.bindPopup(popup_6b1205c9e116fdd6b7698c77af85edb4)
+        ;
+
+        
+    
+    
+            marker_9c34d43709144d79eb1b25ad232594d3.bindTooltip(
+                `<div>
+                     Laisla Programação EN
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9c34d43709144d79eb1b25ad232594d3.setIcon(icon_a96d7adfa752971f2807a12322a98a00);
+            
+    
+            var marker_b5a818bc7f7ec7a4c26d844d4ddae5dc = L.marker(
+                [-22.907568, -47.2165174],
+                {
+}
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
+        
+    
+            var icon_67c4cce595a45bb1c90e6551dbd6e902 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkgreen",
+  "iconColor": "white",
+  "icon": "truck",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d5255aaca48c4e6e7e64f40b631f276c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3eed8ed60c538a70951cbd7af3e20d76 = $(`<div id="html_3eed8ed60c538a70951cbd7af3e20d76" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> 13 Equipe<br>                 <b>Coordenadas:</b> -22.90757, -47.21652                 </div>`)[0];
+                popup_d5255aaca48c4e6e7e64f40b631f276c.setContent(html_3eed8ed60c538a70951cbd7af3e20d76);
+            
+        
+
+        marker_b5a818bc7f7ec7a4c26d844d4ddae5dc.bindPopup(popup_d5255aaca48c4e6e7e64f40b631f276c)
+        ;
+
+        
+    
+    
+            marker_b5a818bc7f7ec7a4c26d844d4ddae5dc.bindTooltip(
                 `<div>
                      13 Equipe
                  </div>`,
@@ -1698,17 +1726,17 @@
             );
         
     
-                marker_1d3c39eb463ef236ebdec422e22a7848.setIcon(icon_f4f296b80f2cf037db27cad6360bad19);
+                marker_b5a818bc7f7ec7a4c26d844d4ddae5dc.setIcon(icon_67c4cce595a45bb1c90e6551dbd6e902);
             
     
-            var marker_e941cb13cfa71852df18e217cfa3a9d7 = L.marker(
+            var marker_3358b1174a70b64befa67dd4a79c168e = L.marker(
                 [-22.519634502697016, -47.76699969291271],
                 {
 }
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var icon_994c88565ce4f3b5caf858a68a830091 = L.AwesomeMarkers.icon(
+            var icon_2d636b5e526b26de6221b843d4ce5c0d = L.AwesomeMarkers.icon(
                 {
   "markerColor": "darkgreen",
   "iconColor": "white",
@@ -1719,24 +1747,24 @@
             );
         
     
-        var popup_127333486cf8b07a0d84d428ab9862a7 = L.popup({
+        var popup_c43d1b96cc07b641d47f6d10d203bbde = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_c46a4f3572c238937effb61aeb867712 = $(`<div id="html_c46a4f3572c238937effb61aeb867712" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> 06 Equipe<br>                 <b>Coordenadas:</b> -22.51963, -47.76700                 </div>`)[0];
-                popup_127333486cf8b07a0d84d428ab9862a7.setContent(html_c46a4f3572c238937effb61aeb867712);
+                var html_d55ca4b08fc2bd2c9cd299171b0f6180 = $(`<div id="html_d55ca4b08fc2bd2c9cd299171b0f6180" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> 06 Equipe<br>                 <b>Coordenadas:</b> -22.51963, -47.76700                 </div>`)[0];
+                popup_c43d1b96cc07b641d47f6d10d203bbde.setContent(html_d55ca4b08fc2bd2c9cd299171b0f6180);
             
         
 
-        marker_e941cb13cfa71852df18e217cfa3a9d7.bindPopup(popup_127333486cf8b07a0d84d428ab9862a7)
+        marker_3358b1174a70b64befa67dd4a79c168e.bindPopup(popup_c43d1b96cc07b641d47f6d10d203bbde)
         ;
 
         
     
     
-            marker_e941cb13cfa71852df18e217cfa3a9d7.bindTooltip(
+            marker_3358b1174a70b64befa67dd4a79c168e.bindTooltip(
                 `<div>
                      06 Equipe
                  </div>`,
@@ -1746,17 +1774,17 @@
             );
         
     
-                marker_e941cb13cfa71852df18e217cfa3a9d7.setIcon(icon_994c88565ce4f3b5caf858a68a830091);
+                marker_3358b1174a70b64befa67dd4a79c168e.setIcon(icon_2d636b5e526b26de6221b843d4ce5c0d);
             
     
-            var marker_eb8ca48ebf1e9d682c9bfa2bf24171cb = L.marker(
+            var marker_c9c79ab6bb832d358da10cd9e3433d40 = L.marker(
                 [-22.5196149, -47.7670138],
                 {
 }
-            ).addTo(map_c9b36593ab43e0ea167bc7e99703e9db);
+            ).addTo(map_cd8c188cb59090b94357892b4061ce36);
         
     
-            var icon_ebd3b099c185ee43d49a24fe31cffab2 = L.AwesomeMarkers.icon(
+            var icon_b1986c2ca9b93514d327efcbe558c63f = L.AwesomeMarkers.icon(
                 {
   "markerColor": "darkgreen",
   "iconColor": "white",
@@ -1767,24 +1795,24 @@
             );
         
     
-        var popup_390cb5fa34e6d2fd10e1b0d9d41c5cbc = L.popup({
+        var popup_80226b58b4fdf041c649b1db88e461d0 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_cfa5fdbe2f3f2e6d60462679473d109e = $(`<div id="html_cfa5fdbe2f3f2e6d60462679473d109e" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> 13 Equipe<br>                 <b>Coordenadas:</b> -22.51961, -47.76701                 </div>`)[0];
-                popup_390cb5fa34e6d2fd10e1b0d9d41c5cbc.setContent(html_cfa5fdbe2f3f2e6d60462679473d109e);
+                var html_172e4546de930d666e898ba19387e947 = $(`<div id="html_172e4546de930d666e898ba19387e947" style="width: 100.0%; height: 100.0%;">                  <b>Equipe:</b> 13 Equipe<br>                 <b>Coordenadas:</b> -22.51961, -47.76701                 </div>`)[0];
+                popup_80226b58b4fdf041c649b1db88e461d0.setContent(html_172e4546de930d666e898ba19387e947);
             
         
 
-        marker_eb8ca48ebf1e9d682c9bfa2bf24171cb.bindPopup(popup_390cb5fa34e6d2fd10e1b0d9d41c5cbc)
+        marker_c9c79ab6bb832d358da10cd9e3433d40.bindPopup(popup_80226b58b4fdf041c649b1db88e461d0)
         ;
 
         
     
     
-            marker_eb8ca48ebf1e9d682c9bfa2bf24171cb.bindTooltip(
+            marker_c9c79ab6bb832d358da10cd9e3433d40.bindTooltip(
                 `<div>
                      13 Equipe
                  </div>`,
@@ -1794,7 +1822,7 @@
             );
         
     
-                marker_eb8ca48ebf1e9d682c9bfa2bf24171cb.setIcon(icon_ebd3b099c185ee43d49a24fe31cffab2);
+                marker_c9c79ab6bb832d358da10cd9e3433d40.setIcon(icon_b1986c2ca9b93514d327efcbe558c63f);
             
 </script>
 </html>
